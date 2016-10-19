@@ -23,7 +23,6 @@ lock_image_info=$(identify $lock_logo | grep -oP ' \d{1,}x\d{1,} ')
 image_width=$(echo $lock_image_info | grep -oP '\d{1,}x' | grep -oP '\d{1,}')
 image_height=$(echo $lock_image_info | grep -oP 'x\d{1,}' | grep -oP '\d{1,}')
 
-lock_params=()
 while read LINE; do
     if [[ "$LINE" =~ ([0-9]+)x([0-9]+)\+([0-9]+)\+([0-9]+) ]] ; then
         width=${BASH_REMATCH[1]}
@@ -32,11 +31,11 @@ while read LINE; do
         y_off=${BASH_REMATCH[4]}
         mid_x_image=$(($width  / 2 + $x_off - $image_width  / 2))
         mid_y_image=$(($height / 2 + $y_off - $image_height / 2))
-        lock_params+=($lock_logo -geometry +$mid_x_image+$mid_y_image -composite)
+
+        # Update image with overlay for screen
+        ffmpeg -y -i $tmp_image -i $lock_logo -filter_complex "overlay=$mid_x_image:$mid_y_image" -loglevel quiet $tmp_image
     fi
 done <<<"`xrandr`"
-
-convert "$tmp_image" '-level' '0%,100%,0.6' "${lock_params[@]}" "$tmp_image"
 
 #----------------------------------------------
 # Invoke i3lock

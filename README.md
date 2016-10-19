@@ -2,13 +2,13 @@
 
 Based on petvas' i3lock-blur using ffmpeg and also on meskarune's and guimeira's multimonitor lock logo implementations
 
-This solution uses ffmpeg to get a blurred screenshot and then uses ImageMagick to overlay the lock logo
+This solution uses ffmpeg to get a blurred screenshot and then uses ffmpeg again to overlay the lock logo separately
 
 You can use any lock logo you want as the script looks up the logo size at runtime
 
 ##Dependencies:
 - [ffmpeg](www.ffmpeg.org)
-- [imagemagick](www.imagemagick.org)
+- realpath
 - i3lock
 
 ##i3lock-color:
