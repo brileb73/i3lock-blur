@@ -12,7 +12,7 @@ total_resolution=$(xrandr | grep -oP 'current \d{1,} x \d{1,}' | grep -oP '\d{1,
 #----------------------------------------------
 # Get and blur screenshot
 #----------------------------------------------
-ffmpeg -f x11grab -video_size $total_resolution -y -i $DISPLAY -filter_complex "boxblur=5:3" -vframes 1 -loglevel quiet $tmp_image
+ffmpeg -f x11grab -video_size $total_resolution -y -i $DISPLAY -filter_complex "boxblur=5:3,lutyuv=y=val*0.6" -vframes 1 -loglevel quiet $tmp_image
 
 #----------------------------------------------
 # Add lock overlay
