@@ -1,14 +1,22 @@
 # i3lock-blur
 
-simplest i3lock blur script only requirements is `ffmpeg` and `xrandr`
+Based on petvas' i3lock-blur using ffmpeg and also on meskarune's and guimeira's multimonitor lock logo implementations
 
-example: [video](https://gfycat.com/SentimentalTemptingElephantbeetle)
+This solution uses ffmpeg to get a blurred screenshot and then uses ImageMagick to overlay the lock logo
 
-##simple usecase:
+You can use any lock logo you want as the script looks up the logo size at runtime
 
-1. put lock.png and lock.sh to the home folder
-2. chmod +x lock.sh
-3. add i3 config: `bindsym $mod+q exec ~/lock.sh` to bind lock to `mod+q`
-4. PROFIT!!!
+##Dependencies:
+- [ffmpeg](www.ffmpeg.org)
+- [imagemagick](www.imagemagick.org)
+- i3lock
 
-[reddit link](https://www.reddit.com/r/unixporn/comments/4yj29e/i3lock_simple_blur_script/)
+##i3lock-color:
+Fun fact of the day: the original i3lock-color is no longer being maintained
+Therefore I added handling to avoid errors if you don't have i3lock-color installed. But there is another version of i3lock-color that is still being maintained [here](https://github.com/chrjguill/i3lock-color).
+
+##Example Usage:
+
+1. Create symlink in /usr/local/bin to where lock.sh ends up `sudo ln -s $(pwd)/lock.sh /usr/local/bin/i3lock-blur`
+2. Add i3 config: `bindsym $mod+q exec i3lock-blur` to bind lock to `mod+q`
+3. PROFIT!!!
