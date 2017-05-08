@@ -46,5 +46,7 @@ color_lock_params=(--textcolor=ffffff00 --insidecolor=ffffff1c --ringcolor=fffff
                    --ringwrongcolor=00000055 --insidewrongcolor=0000001c)
 # Try to use with color parameters
 if ! i3lock-color -n "${color_lock_params[@]}" -i "$tmp_image" > /dev/null 2>&1 ; then
-    i3lock -n -e -i "$tmp_image"
+    if ! i3lock -n "${color_lock_params[@]}" -i "$tmp_image" > /dev/null 2>&1 ; then
+        i3lock -n -e -i "$tmp_image"
+    fi
 fi
